@@ -194,19 +194,19 @@ function calc_when_to_plant_cucumbers(){
   </footer>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.dropdown').forEach(function(dd) {
+    dd.addEventListener('click', function(e) { e.stopPropagation(); });
+  });
   document.querySelectorAll('.dropdown-btn').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
-      e.stopPropagation();
       var menu = this.nextElementSibling;
-      var isOpen = menu.style.display === 'block';
-      // close all
-      document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.style.display = ''; });
-      // toggle this one
-      if (!isOpen) menu.style.display = 'block';
+      var isOpen = menu.classList.contains('open');
+      document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.classList.remove('open'); m.style.display = ''; });
+      if (!isOpen) { menu.classList.add('open'); menu.style.display = 'block'; }
     });
   });
   document.addEventListener('click', function() {
-    document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.style.display = ''; });
+    document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.classList.remove('open'); m.style.display = ''; });
   });
 });
 </script>
