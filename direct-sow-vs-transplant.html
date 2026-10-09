@@ -170,5 +170,23 @@ footer a:hover { color: var(--accent); }
     <p><a href="/direct-sow-vs-transplant">Direct Sow vs. Transplant</a> <a href="/soil-temperature-germination">Soil Temperature</a> <a href="/succession-planting">Succession Planting</a> <a href="/reading-a-seed-packet">Reading a Seed Packet</a> <a href="/grow-zones-explained">Grow Zones</a> <a href="/seed-starting-indoors">Starting Seeds Indoors</a></p>
     <p><a href="/about">About</a> <a href="/contact">Contact</a> <a href="/privacy-policy">Privacy</a> &middot; <a href="https://swrltools.com">Part of Swrl Tools</a></p>
   </footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.dropdown-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var menu = this.nextElementSibling;
+      var isOpen = menu.style.display === 'block';
+      // close all
+      document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.style.display = ''; });
+      // toggle this one
+      if (!isOpen) menu.style.display = 'block';
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.style.display = ''; });
+  });
+});
+</script>
 </body>
 </html>

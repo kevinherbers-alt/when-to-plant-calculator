@@ -51,7 +51,7 @@ footer a:hover { color: var(--accent); }
 p { margin-bottom: 16px; font-size: 0.97rem; }
 
 /* ── Dropdown nav ── */
-.dropdown { position: relative; display: inline-block; }
+.dropdown { position: relative; display: inline-block; } .dropdown-btn { padding-bottom: 10px; margin-bottom: -6px; }
 .dropdown-btn { color: var(--muted); font-size: 0.85rem; padding: 4px 8px; border-radius: 6px; cursor: pointer; background: none; border: none; font-family: inherit; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; line-height: inherit; }
 .dropdown-btn:hover { color: var(--accent); background: #f0f5ec; }
 .dropdown-btn::after { content: '\25BE'; font-size: 0.65rem; opacity: 0.7; }
@@ -128,5 +128,23 @@ p { margin-bottom: 16px; font-size: 0.97rem; }
   </footer>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.dropdown-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var menu = this.nextElementSibling;
+      var isOpen = menu.style.display === 'block';
+      // close all
+      document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.style.display = ''; });
+      // toggle this one
+      if (!isOpen) menu.style.display = 'block';
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.style.display = ''; });
+  });
+});
+</script>
 </body>
 </html>

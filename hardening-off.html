@@ -122,5 +122,23 @@ footer a:hover { color: var(--accent); }
   </footer>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.dropdown-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var menu = this.nextElementSibling;
+      var isOpen = menu.style.display === 'block';
+      // close all
+      document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.style.display = ''; });
+      // toggle this one
+      if (!isOpen) menu.style.display = 'block';
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.style.display = ''; });
+  });
+});
+</script>
 </body>
 </html>

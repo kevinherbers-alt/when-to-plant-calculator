@@ -58,7 +58,7 @@ footer a:hover { color: var(--accent); }
 .free-badge { display: inline-block; background: #eef3e6; color: var(--accent-dark); font-size: 0.75rem; font-weight: 700; border-radius: 999px; padding: 3px 10px; margin-left: 8px; }
 
 /* ── Dropdown nav ── */
-.dropdown { position: relative; display: inline-block; }
+.dropdown { position: relative; display: inline-block; } .dropdown-btn { padding-bottom: 10px; margin-bottom: -6px; }
 .dropdown-btn { color: var(--muted); font-size: 0.85rem; padding: 4px 8px; border-radius: 6px; cursor: pointer; background: none; border: none; font-family: inherit; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; line-height: inherit; }
 .dropdown-btn:hover { color: var(--accent); background: #f0f5ec; }
 .dropdown-btn::after { content: '\25BE'; font-size: 0.65rem; opacity: 0.7; }
@@ -191,5 +191,23 @@ function calc_when_to_plant_lettuce(){
     <p><a href="/direct-sow-vs-transplant">Direct Sow vs. Transplant</a> <a href="/soil-temperature-germination">Soil Temperature</a> <a href="/succession-planting">Succession Planting</a> <a href="/reading-a-seed-packet">Reading a Seed Packet</a> <a href="/grow-zones-explained">Grow Zones</a> <a href="/seed-starting-indoors">Starting Seeds Indoors</a></p>
     <p><a href="/about">About</a> <a href="/contact">Contact</a> <a href="/privacy-policy">Privacy</a> &middot; <a href="https://swrltools.com">Part of Swrl Tools</a></p>
   </footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.dropdown-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var menu = this.nextElementSibling;
+      var isOpen = menu.style.display === 'block';
+      // close all
+      document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.style.display = ''; });
+      // toggle this one
+      if (!isOpen) menu.style.display = 'block';
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.style.display = ''; });
+  });
+});
+</script>
 </body>
 </html>
