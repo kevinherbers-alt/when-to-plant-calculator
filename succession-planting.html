@@ -56,7 +56,6 @@ footer a:hover { color: var(--accent); }
 .dropdown-menu { display: none; position: absolute; top: calc(100% + 4px); left: 0; background: var(--card); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); min-width: 200px; z-index: 200; padding: 6px; }
 .dropdown-menu a { display: block; padding: 8px 12px; color: var(--text); text-decoration: none; font-size: 0.84rem; border-radius: 6px; white-space: nowrap; }
 .dropdown-menu a:hover { background: #f0f5ec; color: var(--accent); }
-.dropdown:hover .dropdown-menu { display: block; }
 @media (max-width: 620px) {
   .dropdown-menu { position: static; box-shadow: none; border: none; padding-left: 8px; margin-top: 4px; }
 }
@@ -157,20 +156,24 @@ footer a:hover { color: var(--accent); }
   </footer>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.dropdown').forEach(function(dd) {
-    dd.addEventListener('click', function(e) { e.stopPropagation(); });
-  });
+  function closeAll() {
+    document.querySelectorAll('.dropdown-menu').forEach(function(m) {
+      m.style.display = '';
+    });
+  }
   document.querySelectorAll('.dropdown-btn').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
+      e.stopPropagation();
       var menu = this.nextElementSibling;
-      var isOpen = menu.classList.contains('open');
-      document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.classList.remove('open'); m.style.display = ''; });
-      if (!isOpen) { menu.classList.add('open'); menu.style.display = 'block'; }
+      var isOpen = menu.style.display === 'block';
+      closeAll();
+      if (!isOpen) { menu.style.display = 'block'; }
     });
   });
-  document.addEventListener('click', function() {
-    document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.classList.remove('open'); m.style.display = ''; });
-  });
+  document.addEventListener('click', closeAll);
+  document.addEventListener('touchstart', function(e) {
+    if (!e.target.closest('.dropdown')) { closeAll(); }
+  }, { passive: true });
 });
 </script>
 </body>
